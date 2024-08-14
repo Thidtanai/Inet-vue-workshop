@@ -2,6 +2,9 @@
   <!-- <ul>
     <li><RouterLink :to="{ name: 'home' }">home</RouterLink></li>
     <li><RouterLink :to="{ name: 'about' }">about</RouterLink></li>
+    <li>
+      <RouterLink :to="{ name: 'product list' }">product list</RouterLink>
+    </li>
   </ul> -->
   <RouterView />
 </template>
@@ -23,4 +26,5 @@ import { RouterView } from "vue-router";
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
 }
+
 </style>

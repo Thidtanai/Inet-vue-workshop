@@ -8,6 +8,16 @@ export const authenticate = (response, next) => {
   next();
 };
 
+export const getToken = () => {
+  if (window !== "undefined") {
+    if (localStorage.getItem("Token")) {
+      return localStorage.getItem("Token");
+    } else {
+      return false;
+    }
+  }
+};
+
 export const logout = (next) => {
   if (window !== "undefined") {
     localStorage.clear();
