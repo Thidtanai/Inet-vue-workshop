@@ -5,7 +5,7 @@ import Login from "../views/Login.vue";
 import { createWebHistory, createRouter } from "vue-router";
 
 const routes = [
-  { path: "/", name: "home", component: Home },
+  { path: "/home", name: "home", component: Home },
   { path: "/about", name: "about", component: About },
   { path: "/login", name: "login", component: Login },
   {
@@ -22,6 +22,11 @@ const routes = [
         path: "/product",
         name: "product",
         component: () => import("../views/ProductList.vue"),
+      },
+      {
+        path: "/mycart",
+        name: "mycart",
+        component: () => import("../views/MyCart.vue"),
       },
     ],
   },

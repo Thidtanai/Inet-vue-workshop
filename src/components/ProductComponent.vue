@@ -53,12 +53,18 @@ export default {
       type: String,
       default: "Product description",
     },
+    product_id: {
+      type: String,
+      required: true,
+    },
   },
   methods: {
     showModal() {
       this.$emit("showModal", {
         product_name: this.product_name,
         product_price: this.product_price,
+        _id: this.product_id,
+        product_stock: this.product_left,
       });
     },
   },
