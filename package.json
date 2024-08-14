@@ -11,7 +11,9 @@
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
     "ant-design-vue": "^4.2.3",
+    "axios": "^1.7.4",
     "vue": "^3.4.35",
+    "vue-axios": "^3.5.2",
     "vue-cookies": "^1.8.4",
     "vue-router": "^4.4.3"
   },
