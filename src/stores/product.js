@@ -25,26 +25,73 @@ export const useProductStore = defineStore("useProductStore", () => {
       });
   };
 
+  const add_product = async (newProduct) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/v1/products/",
+        newProduct,
+        {
+          headers: { Authorization: `Bearer ${getToken()}` },
+        }
+      );
+      products.value.push(response.data.data);
+    } catch (error) {
+      console.log("Error adding product:", error);
+    }
+  };
+
+  const update_product = async (updatedProduct) => {
+    try {
+      await axios.put(
+        `http://localhost:3000/api/v1/products/${updatedProduct.product_id}`,
+        updatedProduct,
+        {
+          headers: { Authorization: `Bearer ${getToken()}` },
+        }
+      );
+      // Update the local state
+      const index = products.value.findIndex(
+        (product) => product._id === updatedProduct._id
+      );
+      if (index !== -1) {
+        products.value[index] = updatedProduct;
+      }
+    } catch (error) {
+      console.log("Error updating product:", error);
+    }
+  };
+
+  const delete_product = async (productId) => {
+    try {
+      await axios.delete(`http://localhost:3000/api/v1/products/${productId}`, {
+        headers: { Authorization: `Bearer ${getToken()}` },
+      });
+      // Remove the product from the local state
+      products.value = products.value.filter(
+        (product) => product._id !== productId
+      );
+    } catch (error) {
+      console.log("Error deleting product:", error);
+    }
+  };
+
   const search_products = computed(() => {
     if (input.value.length < 3) return products.value;
 
     return products.value.filter((prd) => {
-      if (
-        prd.title.toLowerCase().includes(input.value.toLowerCase()) == false
-      ) {
-        return false;
-      } else {
-        return prd.title.toLowerCase().includes(input.value.toLowerCase());
-      }
+      return prd.product_name.toLowerCase().includes(input.value.toLowerCase());
     });
   });
 
   return {
     products,
     fetch_products,
+    update_product,
+    delete_product,
     list_products,
     load_products,
     input,
     search_products,
+    add_product,
   };
 });
