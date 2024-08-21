@@ -128,12 +128,13 @@
                 id="user-menu-button"
                 aria-expanded="false"
                 aria-haspopup="true"
+                @click="clickIcon"
               >
                 <span class="absolute -inset-1.5"></span>
                 <span class="sr-only">Open user menu</span>
                 <img
                   class="h-8 w-8 rounded-full"
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  src="https://cdn-icons-png.flaticon.com/512/4715/4715329.png"
                   alt=""
                 />
               </button>
@@ -158,30 +159,15 @@
               v-if="isClickIcon"
             >
               <!-- Active: "bg-gray-100", Not Active: "" -->
-              <a
-                href="#"
-                class="block px-4 py-2 text-sm text-gray-700"
-                role="menuitem"
-                tabindex="-1"
-                id="user-menu-item-0"
-                >Your Profile</a
-              >
-              <a
-                href="#"
-                class="block px-4 py-2 text-sm text-gray-700"
-                role="menuitem"
-                tabindex="-1"
-                id="user-menu-item-1"
-                >Settings</a
-              >
-              <a
-                href="#"
+              <button
                 class="block px-4 py-2 text-sm text-gray-700"
                 role="menuitem"
                 tabindex="-1"
                 id="user-menu-item-2"
-                >Sign out</a
+                @click="clickLogout"
               >
+                Sign out
+              </button>
             </div>
           </div>
         </div>
@@ -221,12 +207,27 @@
 </template>
 
 <script>
+import { getToken, logout } from "../services/authorize";
+
 export default {
   name: "Toolbar",
   data() {
     return {
       isClickIcon: false,
     };
+  },
+  setup() {
+    if (!getToken) {
+      window.location.replace("/login");
+    }
+  },
+  methods: {
+    clickIcon() {
+      this.isClickIcon = !this.isClickIcon;
+    },
+    clickLogout() {
+      logout(window.location.replace("/login"));
+    },
   },
 };
 </script>
