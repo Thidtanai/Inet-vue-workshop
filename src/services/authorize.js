@@ -18,6 +18,16 @@ export const getToken = () => {
   }
 };
 
+export const getRole = () => {
+  if (window !== "undefined") {
+    if (localStorage.getItem("Role")) {
+      return localStorage.getItem("Role");
+    } else {
+      return false;
+    }
+  }
+};
+
 export const logout = (next) => {
   if (window !== "undefined") {
     localStorage.clear();

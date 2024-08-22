@@ -79,6 +79,12 @@
                 class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                 >Manage</a
               >
+              <a
+                v-if="isAdmin"
+                href="/approve"
+                class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                >Approve users</a
+              >
               <!-- <a
                 href="#"
                 class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
@@ -200,13 +206,14 @@
 </template>
 
 <script>
-import { getToken, logout } from "../services/authorize";
+import { getRole, getToken, logout } from "../services/authorize";
 
 export default {
   name: "Toolbar",
   data() {
     return {
       isClickIcon: false,
+      isAdmin: getRole() === "admin",
     };
   },
   setup() {

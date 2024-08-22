@@ -35,6 +35,11 @@ const routes = [
         name: "manage",
         component: () => import("../views/ProductManage.vue"),
       },
+      {
+        path: "/approve",
+        name: "approve",
+        component: () => import("../views/Approve.vue"),
+      },
     ],
   },
 ];
